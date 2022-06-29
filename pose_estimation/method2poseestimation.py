@@ -4,14 +4,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pyinputplus as pyip
 
-body_parts = ['right wrist', 'right elbow', 'right shoulder', 'left wrist',
-                              'left elbow', 'left shoulder', 'right hip', 'right knee',
-                              'right ankle', 'right foot', 'left hip', 'left knee', 'left ankle',
-                              'left foot']
-first_joint = pyip.inputMenu(body_parts)
-second_joint = pyip.inputMenu(body_parts)
-third_joint = pyip.inputMenu(body_parts)
-left_knee_angle_over_time = []
+# body_parts = ['right_wrist', 'right_elbow', 'right_shoulder', 'left_wrist',
+#                               'left_elbow', 'left_shoulder', 'right_hip', 'right_knee',
+#                               'right_ankle', 'right_foot', 'left_hip', 'left_knee', 'left_ankle',
+#                               'left_foot']
+# print("Welcome to the joint angle analyser\n")
+# print("Please choose the proximal joint ")
+# first_joint = pyip.inputMenu(body_parts)
+# print("Please choose the middle joint ")
+# second_joint = pyip.inputMenu(body_parts)
+# print("Please choose the distal joint ")
+# third_joint = pyip.inputMenu(body_parts)
+# print(first_joint)
+angle_over_time = []
+
+
 
 def calculate_angle(a, b, c):
     a = np.array(a)  # Proximal
@@ -24,7 +31,7 @@ def calculate_angle(a, b, c):
     if angle > 180.0:
         angle = 360-angle
 
-    left_knee_angle_over_time.append(angle)
+    angle_over_time.append(angle)
 
     return angle
 
@@ -94,14 +101,14 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
     cap.release()
     cv2.destroyAllWindows()
-    knee_angle_max = int(max(left_knee_angle_over_time))
-    knee_angle_min = int(min(left_knee_angle_over_time))
-    print(f'Max knee angle: {knee_angle_max} degrees')
-    print(f'Min knee angle: {knee_angle_min} degrees')
-    plt.plot(left_knee_angle_over_time)
+    angle_max = int(max(angle_over_time))
+    angle_min = int(min(angle_over_time))
+    print(f'Max angle: {angle_max} degrees')
+    print(f'Min angle: {angle_min} degrees')
+    plt.plot(angle_over_time)
     ax = plt.gca()
     ax.axes.xaxis.set_ticks([])
-    plt.ylabel('Knee Angle: Degrees')
-    plt.title('Knee Angle Throughout Movement')
+    plt.ylabel('Angle: Degrees')
+    plt.title('Angle Throughout Movement')
     plt.show()
 
