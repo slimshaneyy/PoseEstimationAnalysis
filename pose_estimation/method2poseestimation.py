@@ -4,6 +4,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pyinputplus as pyip
 
+body_parts = ['right wrist', 'right elbow', 'right shoulder', 'left wrist',
+                              'left elbow', 'left shoulder', 'right hip', 'right knee',
+                              'right ankle', 'right foot', 'left hip', 'left knee', 'left ankle',
+                              'left foot']
+first_joint = pyip.inputMenu(body_parts)
+second_joint = pyip.inputMenu(body_parts)
+third_joint = pyip.inputMenu(body_parts)
 left_knee_angle_over_time = []
 
 def calculate_angle(a, b, c):
